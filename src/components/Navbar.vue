@@ -5,9 +5,16 @@
         <v-btn text dark class="mr-1" to="/">Inicio</v-btn>
         <v-btn text dark class="mr-1" to="/apod">APOD</v-btn>
         <v-btn text dark class="mr-1" to="/rover">Rover</v-btn>
-        <!--  <v-btn text dark class="mr-1" to="/login" @click="logout">{{
-          currentUser ? "Cerrar Sesión" : "Regístrate"
-        }}</v-btn> -->
+        <v-btn
+          text
+          dark
+          class="mr-1"
+          to="/"
+          v-show="currentUser"
+          @click="logout"
+        >
+          Cerrar Sesión
+        </v-btn>
       </div>
 
       <v-menu center dark offset-y>
@@ -26,23 +33,27 @@
         <v-list>
           <v-list-item id="block" class="text-center my-2">
             <v-list-item-title>
-              <v-btn text dark rounded class="mr-2 my-1" to="/">Inicio</v-btn>
+              <v-btn text dark class="mr-2 my-1" to="/">Inicio</v-btn>
             </v-list-item-title>
 
             <v-list-item-title>
-              <v-btn text dark rounded class="mr-2 my-1" to="/apod">APOD</v-btn>
+              <v-btn text dark class="mr-2 my-1" to="/apod">APOD</v-btn>
             </v-list-item-title>
 
             <v-list-item-title>
-              <v-btn text dark rounded class="mr-2 my-1" to="/rover"
-                >Rover</v-btn
+              <v-btn text dark class="mr-2 my-1" to="/rover">Rover</v-btn>
+            </v-list-item-title>
+
+            <v-list-item-title>
+              <v-btn
+                text
+                dark
+                class="mr-2"
+                to="/"
+                v-show="currentUser"
+                @click="logout"
+                >Cerrar Sesión</v-btn
               >
-            </v-list-item-title>
-
-            <v-list-item-title>
-              <v-btn text dark rounded class="mr-2" to="/login">{{
-                currentUser ? "Cerrar Sesión" : "Regístrate"
-              }}</v-btn>
             </v-list-item-title>
           </v-list-item>
         </v-list>

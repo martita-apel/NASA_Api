@@ -28,13 +28,7 @@ export default {
 
 <style scoped>
 .apod {
-  background-image: linear-gradient(
-    to top,
-    #fff800 0%,
-    #ff1361 35%,
-    #44107a 65%,
-    #09003d 100%
-  );
+  background-image: linear-gradient(to top, #0250c5 0%, #d43f8d 100%);
 }
 h1 {
   color: white;
