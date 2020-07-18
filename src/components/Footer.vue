@@ -1,6 +1,6 @@
 <template>
   <v-footer dark padless>
-    <v-card flat tile class="grey darken-4 white--text text-center">
+    <v-card flat tile class="grey darken-4 white--text text-center footer">
       <v-card-text>
         <v-btn v-for="icon in icons" :key="icon" class="mx-3 white--text" icon>
           <v-icon size="30px">{{ icon }}</v-icon>
@@ -38,5 +38,8 @@ export default {
 <style>
 #logo {
   max-width: 70px;
+}
+.footer {
+  width: 100%;
 }
 </style>
