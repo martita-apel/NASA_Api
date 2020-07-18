@@ -1,13 +1,9 @@
 <template>
-  <div id="home">
+  <div id="home" :style="{background: `url(${apod.url})`}" max-width="100%">
     <v-row justify="center">
       <v-dialog v-model="dialog" max-width="300">
         <div ref="form" :model="usuario">
-          <v-card
-            id="login_card"
-            class="white py-8 px-10 rounded-xl"
-            max-width="380"
-          >
+          <v-card id="login_card" class="white py-8 px-10 rounded-xl" max-width="380">
             <br />
             <v-text-field
               v-model="usuario.email"
@@ -32,13 +28,7 @@
               outlined
             ></v-text-field>
 
-            <v-btn
-              id="ingresar_boton"
-              type="submit"
-              color="warning"
-              @click="login"
-              >INGRESAR</v-btn
-            >
+            <v-btn id="ingresar_boton" type="submit" color="warning" @click="login">INGRESAR</v-btn>
           </v-card>
         </div>
       </v-dialog>
@@ -52,8 +42,7 @@
       rounded
       color="white"
       @click.stop="dialog = true"
-      >Iniciar Sesión</v-btn
-    >
+    >Iniciar Sesión</v-btn>
   </div>
 </template>
 
@@ -69,21 +58,21 @@ export default {
       showPassword: false,
       usuario: {
         email: "",
-        password: "",
-      },
+        password: ""
+      }
     };
   },
   computed: {
-    ...mapState(["currentUser"]),
+    ...mapState(["currentUser", "apod"])
   },
   methods: {
-    ...mapActions(["updateUser"]),
+    ...mapActions(["updateUser", "getApod"]),
     login(e) {
       e.preventDefault();
       firebase
         .auth()
         .signInWithEmailAndPassword(this.usuario.email, this.usuario.password)
-        .then((user) => {
+        .then(user => {
           console.log(user);
           let usuario = this.usuario.email;
           this.updateUser(usuario);
@@ -94,23 +83,23 @@ export default {
           this.updateUser(null);
           alert("¡Error al iniciar sesión!");
         });
-    },
-    /* noRegister() {
-      this.$router.push("/login");
-    }, */
+    }
   },
+  created() {
+    this.getApod();
+  }
 };
 </script>
 
 <style scoped>
 #home {
-  background-image: url("https://www.advancedsciencenews.com/wp-content/uploads/2020/06/graham-holtshausen-fUnfEz3VLv4-unsplash.jpg");
-  background-size: cover;
-  min-width: 100%;
-  min-height: 670px;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: bottom !important;
+  min-height: 100% !important;
 }
 #boton {
   display: flex;
-  margin-top: 300px;
+  margin: 300px;
 }
 </style>

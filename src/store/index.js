@@ -6,12 +6,19 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    API_KEY: "w3E3ZhsKDuZXQKZbgGJQUfS3FbtRo8kyYzznfpgr",
     currentUser: undefined,
+    apod: "",
+    rover: "",
   },
   mutations: {
     UPDATE_CURR_USER(state, user) {
       state.currentUser = user;
+    },
+    CURRENT_APOD(state, apod) {
+      state.apod = apod;
+    },
+    GET_ROVER(state, rover) {
+      state.rover = rover;
     },
   },
   actions: {
@@ -25,8 +32,31 @@ export default new Vuex.Store({
         }
       });
     },
-    /* getApod({}) {
-      axios.get("https://api.nasa.gov/planetary/apod?api_key=API_KEY");
-    }, */
+    getApod({ commit }) {
+      axios
+        .get(
+          "https://api.nasa.gov/planetary/apod?api_key=w3E3ZhsKDuZXQKZbgGJQUfS3FbtRo8kyYzznfpgr"
+        )
+        .then((response) => {
+          console.log(response.data);
+          commit("CURRENT_APOD", response.data);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    getRover({ commit }) {
+      axios
+        .get(
+          "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=2&api_key=w3E3ZhsKDuZXQKZbgGJQUfS3FbtRo8kyYzznfpgr"
+        )
+        .then((response) => {
+          console.log(response.data);
+          commit("GET_ROVER", response.data);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
   },
 });
