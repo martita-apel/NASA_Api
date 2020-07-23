@@ -32,10 +32,11 @@ export default new Vuex.Store({
         }
       });
     },
-    getApod({ commit }) {
+    getApod({ commit }, date = null) {
+      let queryDate = date ? date : new Date().toISOString().substr(0, 10);
       axios
         .get(
-          "https://api.nasa.gov/planetary/apod?api_key=w3E3ZhsKDuZXQKZbgGJQUfS3FbtRo8kyYzznfpgr"
+          `https://api.nasa.gov/planetary/apod?api_key=w3E3ZhsKDuZXQKZbgGJQUfS3FbtRo8kyYzznfpgr&date=${queryDate}`
         )
         .then((response) => {
           console.log(response.data);
