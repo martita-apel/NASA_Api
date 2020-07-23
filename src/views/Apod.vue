@@ -1,7 +1,18 @@
 <template>
   <div class="apod">
-    <h1>¡HOLA!</h1>
-    <h2>Esta página está en construcción</h2>
+    <v-row class="calendar" justify="space-around" align="center">
+      <v-date-picker v-model="picker" :max="today" header-color="black" elevation="15"></v-date-picker>
+      <v-card max-width="500">
+        <v-img class="white--text align-end" src="https://cdn.vuetifyjs.com/images/cards/docks.jpg">
+          <v-card-title>Top 10 Australian beaches</v-card-title>
+        </v-img>
+        <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
+        <v-card-text class="text--primary">
+          <div>Whitehaven Beach</div>
+          <div>Whitsunday Island, Whitsunday Islands</div>
+        </v-card-text>
+      </v-card>
+    </v-row>
   </div>
 </template>
 
@@ -9,7 +20,10 @@
 export default {
   name: "Apod",
   data() {
-    return {};
+    return {
+      picker: null,
+      today: new Date().toISOString().substr(0, 10),
+    };
   },
   computed: {},
   methods: {},
@@ -26,19 +40,7 @@ export default {
     #09003d 100%
   );
 }
-h1 {
-  color: white;
-  font-weight: 500;
-  letter-spacing: 5px;
-  font-size: 70px;
-  text-align: center;
-  margin: 200px 0 10px 0;
-}
-h2 {
-  color: white;
-  font-size: 50px;
-  text-align: center;
-  font-weight: lighter;
-  margin: 0 0 200px 0;
+.calendar {
+  margin: 150px 0 50px 0;
 }
 </style>
