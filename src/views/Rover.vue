@@ -10,8 +10,11 @@
 
     <v-divider dark class="mx-10 my-5"></v-divider>
 
-    <div v-for="(camera, index) in totalCameras" :key="index">
-      <p>{{camera}}</p>
+    <h2 class="registro">Registro de cámaras</h2>
+    <div id="total_camaras" v-show="cameras">
+      <div v-for="(camera, index) in totalCamera" :key="index">
+        <p class="camara">{{index}} : {{camera}}</p>
+      </div>
     </div>
 
     <v-container>
@@ -70,5 +73,23 @@ export default {
 }
 .card_titulo {
   font-size: 15px;
+}
+.registro {
+  text-align: center;
+  color: white;
+  letter-spacing: 5px;
+  font-size: 25px;
+  font-weight: 300;
+  margin: 30px 0 10px 0;
+}
+.camara {
+  padding: 0 15px;
+}
+#total_camaras {
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
 }
 </style>
