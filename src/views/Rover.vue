@@ -10,29 +10,29 @@
 
     <v-divider dark class="mx-10 my-5"></v-divider>
 
-    <v-row>
-      <v-col cols="12" sm="6" md="4">
-        <v-card
-          class="mx-auto my-4"
-          min-width="150"
-          max-width="300"
-          v-for="r in roverData.photos"
-          :key="r.id"
-        >
-          <v-hover>
-            <v-img min-height="200px" max-height="350px" :src="r.img_src">
-              <v-spacer></v-spacer>
-            </v-img>
-          </v-hover>
-          <v-card-title class="card_titulo dark--text text--secondary">{{r.camera.full_name}}</v-card-title>
-        </v-card>
-      </v-col>
-    </v-row>
+    <div v-for="(camera, index) in totalCameras" :key="index">
+      <p>{{camera}}</p>
+    </div>
+
+    <v-container>
+      <v-row>
+        <v-col cols="12" sm="6" md="4" v-for="r in roverData.photos" :key="r.id">
+          <v-card class="mx-auto my-1" max-width="300">
+            <v-hover>
+              <v-img min-height="180" :src="r.img_src">
+                <v-spacer></v-spacer>
+              </v-img>
+            </v-hover>
+            <v-card-title class="card_titulo dark--text text--secondary">{{r.camera.full_name}}</v-card-title>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Home",
@@ -41,7 +41,16 @@ export default {
     rover: "Curiosity",
     items: ["Curiosity", "Opportunity", "Spirit"],
   }),
-  computed: { ...mapState(["roverData"]) },
+  computed: {
+    ...mapState(["roverData"]),
+    ...mapGetters(["cameras"]),
+    totalCamera() {
+      return this.cameras.reduce((total, camera) => {
+        total[camera] = (total[camera] || 0) + 1;
+        return total;
+      }, {});
+    },
+  },
   methods: {
     ...mapActions(["getRover"]),
     buscarRover() {

@@ -11,9 +11,9 @@ export default new Vuex.Store({
     roverData: "",
   },
   getters: {
-    camera(state) {
-      return state.roverData.photos.map((photos) => {
-        return;
+    cameras(state) {
+      return state.roverData.photos.map((photo) => {
+        return photo.camera.name;
       });
     },
   },
