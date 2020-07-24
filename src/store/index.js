@@ -8,7 +8,14 @@ export default new Vuex.Store({
   state: {
     currentUser: undefined,
     apod: "",
-    rover: "",
+    roverData: "",
+  },
+  getters: {
+    camera(state) {
+      return state.roverData.photos.map((photos) => {
+        return;
+      });
+    },
   },
   mutations: {
     UPDATE_CURR_USER(state, user) {
@@ -18,7 +25,7 @@ export default new Vuex.Store({
       state.apod = apod;
     },
     GET_ROVER(state, rover) {
-      state.rover = rover;
+      state.roverData = rover;
     },
   },
   actions: {
@@ -46,10 +53,10 @@ export default new Vuex.Store({
           console.log(error);
         });
     },
-    getRover({ commit }) {
+    getRover({ commit }, { sol, rover }) {
       axios
         .get(
-          "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=2&api_key=w3E3ZhsKDuZXQKZbgGJQUfS3FbtRo8kyYzznfpgr"
+          `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?sol=${sol}&page=1&api_key=w3E3ZhsKDuZXQKZbgGJQUfS3FbtRo8kyYzznfpgr`
         )
         .then((response) => {
           console.log(response.data);
