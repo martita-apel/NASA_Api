@@ -14,7 +14,7 @@
       </v-col>
 
       <v-col>
-        <v-card max-width="500" class="mx-2">
+        <v-card max-width="500" class="mx-2 pb-1">
           <v-img
             v-show="apod.media_type == 'image'"
             max-height="500"
@@ -83,6 +83,7 @@ export default {
   display: flex;
   object-fit: contain;
   height: fit-content;
+  width: fit-content;
   margin: 0 auto;
 }
 .parrafo {
