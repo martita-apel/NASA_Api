@@ -34,6 +34,10 @@ export default new Vuex.Store({
     },
     getApod({ commit }, date = null) {
       let queryDate = date ? date : new Date().toISOString().substr(0, 10);
+      let backup = {
+        url:
+          "https://apod.nasa.gov/apod/image/2007/NEOWISEBelowBigDipper-7-16-2020-TomMasterson1081.jpg",
+      };
       axios
         .get(
           `https://api.nasa.gov/planetary/apod?api_key=w3E3ZhsKDuZXQKZbgGJQUfS3FbtRo8kyYzznfpgr&date=${queryDate}`
@@ -44,6 +48,7 @@ export default new Vuex.Store({
         })
         .catch(function(error) {
           console.log(error);
+          commit("CURRENT_APOD", backup);
         });
     },
     getRover({ commit }, { sol, rover }) {
