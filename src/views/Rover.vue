@@ -11,7 +11,7 @@
     <v-divider dark class="mx-10 my-5"></v-divider>
 
     <h2 class="registro">Registro de cámaras</h2>
-    <div id="total_camaras" v-show="cameras">
+    <div id="total_camaras">
       <div v-for="(camera, index) in totalCamera" :key="index">
         <p class="camara">{{index}} : {{camera}}</p>
       </div>
@@ -46,13 +46,7 @@ export default {
   }),
   computed: {
     ...mapState(["roverData"]),
-    ...mapGetters(["cameras"]),
-    totalCamera() {
-      return this.cameras.reduce((total, camera) => {
-        total[camera] = (total[camera] || 0) + 1;
-        return total;
-      }, {});
-    },
+    ...mapGetters(["totalCamera"]),
   },
   methods: {
     ...mapActions(["getRover"]),

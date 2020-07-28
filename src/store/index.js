@@ -7,15 +7,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     currentUser: undefined,
-    apod: "",
-    roverData: "",
-  },
-  getters: {
-    cameras(state) {
-      return state.roverData.photos.map((photo) => {
-        return photo.camera.name;
-      });
-    },
+    apod: [],
+    roverData: { photos: [] },
   },
   mutations: {
     UPDATE_CURR_USER(state, user) {
@@ -65,6 +58,19 @@ export default new Vuex.Store({
         .catch(function(error) {
           console.log(error);
         });
+    },
+  },
+  getters: {
+    cameras(state) {
+      return state.roverData.photos.map((photo) => {
+        return photo.camera.name;
+      });
+    },
+    totalCamera(state, getters) {
+      return getters.cameras.reduce((total, camera) => {
+        total[camera] = (total[camera] || 0) + 1;
+        return total;
+      }, {});
     },
   },
 });
